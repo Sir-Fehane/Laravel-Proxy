@@ -16,6 +16,8 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <x-recaptcha-field action="forgot_password" />
+
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
                 {{ __('Email Password Reset Link') }}

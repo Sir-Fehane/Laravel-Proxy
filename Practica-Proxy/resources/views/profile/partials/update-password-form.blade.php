@@ -31,6 +31,8 @@
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <x-recaptcha-field action="update_password" field-id="recaptcha_token_update_password" error-bag="updatePassword" />
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 

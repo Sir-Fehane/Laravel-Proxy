@@ -41,6 +41,8 @@
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
 
+            <x-recaptcha-field action="delete_account" field-id="recaptcha_token_delete_account" error-bag="userDeletion" />
+
             <div class="mt-6 flex justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}

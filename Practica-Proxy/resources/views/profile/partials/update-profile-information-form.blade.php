@@ -11,6 +11,7 @@
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
+        <x-recaptcha-field action="resend_verification" field-id="recaptcha_token_send_verification" />
     </form>
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
@@ -46,6 +47,8 @@
                 </div>
             @endif
         </div>
+
+        <x-recaptcha-field action="update_profile" field-id="recaptcha_token_update_profile" />
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

@@ -13,6 +13,8 @@
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
 
+            <x-recaptcha-field action="resend_verification" />
+
             <div>
                 <x-primary-button>
                     {{ __('Resend Verification Email') }}

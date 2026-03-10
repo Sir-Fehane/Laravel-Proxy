@@ -17,6 +17,10 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        if ($request->session()->has('two_factor_user_id')) {
+            return redirect()->route('two-factor.challenge');
+        }
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

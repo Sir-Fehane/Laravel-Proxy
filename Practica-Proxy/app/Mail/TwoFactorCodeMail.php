@@ -20,7 +20,7 @@ class TwoFactorCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu código de verificación',
+            subject: 'Your verification code',
         );
     }
 

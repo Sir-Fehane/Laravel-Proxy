@@ -46,11 +46,11 @@ class TwoFactorController extends Controller
         }
 
         if (! $user->two_factor_code || $user->two_factor_expires_at->isPast()) {
-            return back()->withErrors(['code' => 'El código ha expirado. Solicita uno nuevo.']);
+            return back()->withErrors(['code' => 'The code has expired. Please request a new one.']);
         }
 
         if ($request->code !== $user->two_factor_code) {
-            return back()->withErrors(['code' => 'El código es incorrecto.']);
+            return back()->withErrors(['code' => 'The code is incorrect.']);
         }
 
         $user->clearTwoFactorCode();
@@ -76,7 +76,7 @@ class TwoFactorController extends Controller
 
         if (RateLimiter::tooManyAttempts($key, 1)) {
             $seconds = RateLimiter::availableIn($key);
-            return back()->withErrors(['code' => "Espera {$seconds} segundos antes de reenviar."]);
+            return back()->withErrors(['code' => "Please wait {$seconds} seconds before resending."]);
         }
 
         RateLimiter::hit($key, 60);
@@ -91,6 +91,6 @@ class TwoFactorController extends Controller
         $user->generateTwoFactorCode();
         Mail::to($user)->send(new TwoFactorCodeMail($user));
 
-        return back()->with('status', 'Se ha enviado un nuevo código a tu correo.');
+        return back()->with('status', 'A new code has been sent to your email.');
     }
 }

@@ -20,7 +20,7 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" maxlength="255" pattern="[a-zA-ZÀ-ÿ\s\-\.\']+" title="Solo letras, espacios, guiones y puntos" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" maxlength="255" pattern="[a-zA-ZÀ-ÿ\s\-\.\']+" title="Only letters, spaces, hyphens and dots" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 

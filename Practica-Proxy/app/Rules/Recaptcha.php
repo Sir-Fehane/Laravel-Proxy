@@ -20,7 +20,7 @@ class Recaptcha implements ValidationRule
         }
 
         if (empty($value)) {
-            $fail(__('La verificación reCAPTCHA es requerida.'));
+            $fail(__('reCAPTCHA verification is required.'));
             return;
         }
 
@@ -37,7 +37,7 @@ class Recaptcha implements ValidationRule
                 Log::warning('reCAPTCHA verification failed', [
                     'error-codes' => $body['error-codes'] ?? [],
                 ]);
-                $fail(__('La verificación reCAPTCHA falló. Intenta de nuevo.'));
+                $fail(__('reCAPTCHA verification failed. Please try again.'));
                 return;
             }
 
@@ -46,7 +46,7 @@ class Recaptcha implements ValidationRule
                     'score' => $body['score'] ?? 0,
                     'threshold' => config('recaptcha.score_threshold'),
                 ]);
-                $fail(__('La verificación reCAPTCHA falló. Intenta de nuevo.'));
+                $fail(__('reCAPTCHA verification failed. Please try again.'));
                 return;
             }
 
@@ -55,11 +55,11 @@ class Recaptcha implements ValidationRule
                     'expected' => $this->expectedAction,
                     'actual' => $body['action'] ?? '',
                 ]);
-                $fail(__('La verificación reCAPTCHA falló. Intenta de nuevo.'));
+                $fail(__('reCAPTCHA verification failed. Please try again.'));
             }
         } catch (\Exception $e) {
             Log::error('reCAPTCHA verification error', ['message' => $e->getMessage()]);
-            $fail(__('No se pudo verificar reCAPTCHA. Intenta de nuevo.'));
+            $fail(__('Could not verify reCAPTCHA. Please try again.'));
         }
     }
 }

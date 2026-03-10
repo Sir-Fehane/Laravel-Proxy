@@ -1,7 +1,7 @@
 <x-mail::message>
-# Hola, {{ $name }}
+# Hello, {{ $name }}
 
-Tu código de verificación es:
+Your verification code is:
 
 <x-mail::panel>
 <div style="text-align: center; font-size: 32px; font-weight: bold; letter-spacing: 8px;">
@@ -9,8 +9,8 @@ Tu código de verificación es:
 </div>
 </x-mail::panel>
 
-Este código expira en **10 minutos**. Si no solicitaste este código, puedes ignorar este mensaje.
+This code expires in **10 minutes**. If you did not request this code, you can ignore this message.
 
-Gracias,<br>
+Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>

@@ -28,7 +28,7 @@ class TwoFactorController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'code' => ['required', 'string', 'size:6'],
+            'code' => ['required', 'string', 'digits:6'],
             'recaptcha_token' => [new Recaptcha('two_factor')],
         ]);
 

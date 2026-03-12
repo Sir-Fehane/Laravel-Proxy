@@ -38,6 +38,13 @@ class TwoFactorController extends Controller
             return redirect()->route('login');
         }
 
+        $key = 'two-factor-verify:' . $userId;
+
+        if (RateLimiter::tooManyAttempts($key, 5)) {
+            $seconds = RateLimiter::availableIn($key);
+            return back()->withErrors(['code' => "Too many attempts. Please wait {$seconds} seconds."]);
+        }
+
         $user = User::find($userId);
 
         if (! $user) {
@@ -50,8 +57,11 @@ class TwoFactorController extends Controller
         }
 
         if ($request->code !== $user->two_factor_code) {
+            RateLimiter::hit($key, 900);
             return back()->withErrors(['code' => 'The code is incorrect.']);
         }
+
+        RateLimiter::clear($key);
 
         $user->clearTwoFactorCode();
 
